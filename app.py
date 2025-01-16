@@ -1,13 +1,9 @@
 from openai import OpenAI
 import streamlit as st
 import pandas as pd
-from dotenv import load_dotenv
-import os
 from tools import get_tools, parse_tool_call
 from prompts import SYSTEM_PROMPT
 from functions import plot_figure
-
-load_dotenv()
 
 # Initialize constants and configurations
 def init_config():
@@ -18,7 +14,7 @@ def init_config():
     return {
         'tools': get_tools(),
         'prompt': SYSTEM_PROMPT,
-        'api_key': os.getenv("OPENAI_API_KEY")
+        'api_key': st.secrets["OPENAI_API_KEY"]
     }
 
 # Session state management

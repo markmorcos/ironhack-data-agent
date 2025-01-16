@@ -1,10 +1,7 @@
 import json
 import pandas as pd
-import os
+import streamlit as st
 from sqlalchemy import create_engine, text
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def get_tools():
     return [
@@ -68,10 +65,10 @@ def parse_tool_call(message):
     return response
 
 def get_data_df(sql_query):
-    user = os.getenv("DB_USER")
-    password = os.getenv("DB_PASSWORD")
-    host = os.getenv("DB_HOST")
-    database = os.getenv("DB_DATABASE")
+    user = st.secrets["DB_USER"]
+    password = st.secrets["DB_PASSWORD"]
+    host = st.secrets["DB_HOST"]
+    database = st.secrets["DB_DATABASE"]
     connection_string = f"mysql+pymysql://{user}:{password}@{host}/{database}"
     engine = create_engine(connection_string)
 

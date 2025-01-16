@@ -31,15 +31,23 @@ cd data-agent
 pip install -r requirements.txt
 ```
 
-3. Set up environment variables in `.env`:
+3. Configure Streamlit secrets:
 
-```env
-OPENAI_API_KEY=your_openai_api_key
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-DB_HOST=localhost
-DB_DATABASE=sakila
+Create `.streamlit/secrets.toml` in your project directory:
+
+```toml
+OPENAI_API_KEY = "your_openai_api_key"
+DB_USER = "your_database_user"
+DB_PASSWORD = "your_database_password"
+DB_HOST = "localhost"
+DB_DATABASE = "sakila"
 ```
+
+For deployment, you can set these secrets in your Streamlit Cloud dashboard:
+
+1. Go to your app's dashboard
+2. Navigate to ⚙️ Settings → Secrets
+3. Add each key-value pair from above
 
 ## Usage
 
@@ -60,12 +68,14 @@ streamlit run app.py
 
 ```
 data-agent/
-├── app.py # Main Streamlit application
-├── tools.py # Database and visualization tools
-├── functions.py # Helper functions
-├── prompts.py # System prompts for the AI
+├── .streamlit/
+│   └── secrets.toml    # Configuration secrets (not in git)
+├── app.py             # Main Streamlit application
+├── tools.py           # Database and visualization tools
+├── functions.py       # Helper functions
+├── prompts.py         # System prompts for the AI
 ├── db_schema_fetcher.py # Database schema utility
-└── schema.txt # Cached database schema
+└── schema.txt         # Cached database schema
 ```
 
 ## Technologies Used
