@@ -6,8 +6,8 @@ A Streamlit-powered chatbot that helps users explore and visualize data from the
 
 **Screenshots**
 
-![Data](<assets/Screenshot 2025-01-16 at 16.24.17.png>)
-![Visualization](<assets/Screenshot 2025-01-16 at 16.24.50.png>)
+![Data](assets/Screenshot%202025-01-16%20at%2016.24.17.png)
+![Visualization](assets/Screenshot%202025-01-16%20at%2016.24.50.png)
 
 ## Features
 
@@ -76,13 +76,21 @@ streamlit run app.py
 ```
 data-agent/
 ├── .streamlit/
-│   └── secrets.toml    # Configuration secrets (not in git)
-├── app.py             # Main Streamlit application
-├── tools.py           # Database and visualization tools
-├── functions.py       # Helper functions
-├── prompts.py         # System prompts for the AI
-├── db_schema_fetcher.py # Database schema utility
-└── schema.txt         # Cached database schema
+│   └── secrets.toml
+├── assets/
+│   ├── Screenshot 2025-01-16 at 16.24.17.png
+│   └── Screenshot 2025-01-16 at 16.24.50.png
+├── src/
+│   ├── __init__.py
+│   ├── tools.py
+│   ├── functions.py
+│   ├── prompts.py
+│   └── db_schema_fetcher.py
+├── app.py
+├── requirements.txt
+├── README.md
+├── schema.txt
+└── .gitignore
 ```
 
 ## Technologies Used

@@ -1,9 +1,9 @@
 from openai import OpenAI
 import streamlit as st
 import pandas as pd
-from tools import get_tools, parse_tool_call
-from prompts import SYSTEM_PROMPT
-from functions import plot_figure
+from src.tools import get_tools, parse_tool_call
+from src.prompts import SYSTEM_PROMPT
+from src.functions import plot_figure
 
 # Initialize constants and configurations
 def init_config():
