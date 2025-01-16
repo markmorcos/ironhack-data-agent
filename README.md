@@ -2,6 +2,13 @@
 
 A Streamlit-powered chatbot that helps users explore and visualize data from the Sakila database using natural language queries. The bot is powered by OpenAI's GPT model and can generate both data tables and visualizations.
 
+🔗 **[Live Demo](https://sakila-data-agent.streamlit.app/)**
+
+**Screenshots**
+
+![Data](<assets/Screenshot 2025-01-16 at 16.24.17.png>)
+![Visualization](<assets/Screenshot 2025-01-16 at 16.24.50.png>)
+
 ## Features
 
 - 💬 Natural language interface to query MySQL database
