@@ -30,7 +30,7 @@ def get_database_schema(host: str, user: str, password: str, database: str) -> s
             JOIN information_schema.COLUMNS c 
                 ON t.TABLE_NAME = c.TABLE_NAME 
                 AND t.TABLE_SCHEMA = c.TABLE_SCHEMA
-            WHERE t.TABLE_SCHEMA = %s
+            WHERE t.TABLE_SCHEMA = %s AND t.TABLE_TYPE = 'BASE TABLE'
             ORDER BY t.TABLE_NAME, c.ORDINAL_POSITION
         """, (database,))
         
@@ -76,6 +76,10 @@ def get_database_schema(host: str, user: str, password: str, database: str) -> s
                     f"- {rel['TABLE_NAME']}.{rel['COLUMN_NAME']} → "
                     f"{rel['REFERENCED_TABLE_NAME']}.{rel['REFERENCED_COLUMN_NAME']}\n"
                 )
+
+        # save schema to file
+        with open("schema.txt", "w") as f:
+            f.write(schema_text)
 
         return schema_text
 
