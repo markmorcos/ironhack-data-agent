@@ -5,3 +5,4 @@ pymysql
 pandas
 matplotlib
 plotly
+pinecone
