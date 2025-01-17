@@ -104,8 +104,9 @@ def get_data_df(sql_query):
     user = st.secrets["DB_USER"]
     password = st.secrets["DB_PASSWORD"]
     host = st.secrets["DB_HOST"]
+    port = st.secrets["DB_PORT"]
     database = st.secrets["DB_DATABASE"]
-    connection_string = f"mysql+pymysql://{user}:{password}@{host}/{database}"
+    connection_string = f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
     engine = create_engine(connection_string)
 
     with engine.connect() as connection:    

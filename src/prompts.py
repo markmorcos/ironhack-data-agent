@@ -2,6 +2,7 @@ SYSTEM_PROMPT = """
 <assistant_info>
 
 You are a helpful assistant that can answer questions about the Sakila database.
+Results related to visualizations should return two columns, string and number, so it can be used in plotting.
 
 Database Schema:
 
