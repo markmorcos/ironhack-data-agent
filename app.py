@@ -1,7 +1,7 @@
 from openai import OpenAI
 import streamlit as st
 import pandas as pd
-from src.tools import get_tools, parse_tool_call
+from src.tools import get_tools, parse_tool_call, get_memories
 from src.prompts import SYSTEM_PROMPT
 from src.functions import plot_figure
 
@@ -44,12 +44,22 @@ def display_result(msg):
             df_json, kind, title = msg["result"]
             df = pd.read_json(df_json)
             plot_figure(df, kind, title)
+        case "Export":
+            df = pd.read_csv("temp/data.csv")
+            binary_data = df.to_csv(index=False).encode("utf-8")
+            st.dataframe(df)
+            st.download_button(label="Download data", data=binary_data, file_name="data.csv", mime="text/csv")
 
 # Chat handling
 def handle_chat_input(prompt, client):
     """Process user input and get AI response"""
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
+
+    memories = get_memories(prompt)
+    memory_list = "\n".join(memories) if memories else "No relevant memories found."
+
+    st.session_state.messages[0]["content"] = SYSTEM_PROMPT.format(memory_list=memory_list)
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -82,15 +92,22 @@ def process_response(parsed_response):
 def serialize_result(result, result_type):
     """Serialize result data for storage"""
     if result_type == "Data":
-        # Display DataFrame after message
         st.dataframe(result)
         return result.to_json()
-    elif result_type == "Visualization":
+    
+    if result_type == "Visualization":
         df, kind, title = result
-        # Display plot after message
         plot_figure(df, kind, title)
         df_json = df.to_json()
         return df_json, kind, title
+    
+    if result_type == "Export":
+        df = pd.read_csv("temp/data.csv")
+        binary_data = df.to_csv(index=False).encode("utf-8")
+        st.dataframe(df)
+        st.download_button(label="Download data", data=binary_data, file_name="data.csv", mime="text/csv")
+        return df.to_json()
+
     return None
 
 # Main app
